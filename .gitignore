@@ -1,0 +1,26 @@
+# --- Pesos de modelos y datos (no van al repositorio) ---
+pretrained/
+vendor/
+dataset/
+
+# --- Salidas de ejecucion (se regeneran) ---
+outputs/
+.tmp/
+pattern-engine/node_modules/
+node_modules/
+
+# --- Checkpoints de entrenamiento (grandes; se conservan las metricas) ---
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.joblib
+
+# --- Cache ---
+__pycache__/
+*.py[cod]
+.pytest_cache/
+tests/.pytest-tmp/
+.ipynb_checkpoints/
+*.log

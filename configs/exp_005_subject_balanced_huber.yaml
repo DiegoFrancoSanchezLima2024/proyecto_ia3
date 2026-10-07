@@ -1,0 +1,6 @@
+# Alinea el objetivo de entrenamiento por captura con la evaluacion por persona.
+extends: default.yaml
+
+training:
+  loss: huber
+  subject_balanced_sampling: true

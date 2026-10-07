@@ -1,0 +1,33 @@
+name: sastre-ia
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pytorch=2.3.1
+  - torchvision=0.18.1
+  - pytorch-cuda=12.1
+  - numpy<2
+  - pandas
+  - matplotlib
+  - seaborn
+  - scikit-learn
+  - scipy
+  - pillow
+  - pyyaml
+  - tqdm
+  - jupyter
+  - ipykernel
+  - pip
+  - pip:
+      - timm>=1.0,<2
+      - einops>=0.7
+      - rich>=13
+      - pytest>=8
+      - onnxruntime==1.22.1
+
+# Entorno deliberadamente pequeno: medicion BodyM y entrenamiento local.
+# SMPL-X, VTON y GarmentCode deben ejecutarse en entornos separados para evitar
+# conflictos y no ocupar VRAM de forma simultanea.

@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "chart_id": "satre_alpha_reference_v1",
+  "notice": "Referencia alfa del prototipo; no existe una talla S/M/L universal entre marcas.",
+  "male": {
+    "sizes": {
+      "XS": {"chest": [82, 88], "waist": [68, 74], "hip": [84, 90]},
+      "S":  {"chest": [88, 94], "waist": [74, 82], "hip": [90, 96]},
+      "M":  {"chest": [94, 102], "waist": [82, 90], "hip": [96, 104]},
+      "L":  {"chest": [102, 110], "waist": [90, 98], "hip": [104, 112]},
+      "XL": {"chest": [110, 118], "waist": [98, 106], "hip": [112, 120]},
+      "XXL": {"chest": [118, 128], "waist": [106, 116], "hip": [120, 130]}
+    },
+    "length_bands_cm": {"short_max": 168, "regular_max": 182}
+  },
+  "female": {
+    "sizes": {
+      "XS": {"chest": [76, 82], "waist": [58, 64], "hip": [82, 88]},
+      "S":  {"chest": [82, 88], "waist": [64, 70], "hip": [88, 94]},
+      "M":  {"chest": [88, 96], "waist": [70, 78], "hip": [94, 102]},
+      "L":  {"chest": [96, 104], "waist": [78, 86], "hip": [102, 110]},
+      "XL": {"chest": [104, 114], "waist": [86, 96], "hip": [110, 120]},
+      "XXL": {"chest": [114, 126], "waist": [96, 108], "hip": [120, 132]}
+    },
+    "length_bands_cm": {"short_max": 160, "regular_max": 174}
+  }
+}

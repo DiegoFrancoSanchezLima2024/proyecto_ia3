@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "engine": "FreeSewing",
+  "designs": {
+    "jacket": {
+      "design": "jaeger",
+      "package": "@freesewing/jaeger",
+      "required": {
+        "biceps": "bicep",
+        "chest": "chest",
+        "hpsToBust": null,
+        "hpsToWaistBack": null,
+        "neck": null,
+        "shoulderToShoulder": "shoulder-breadth",
+        "shoulderSlope": null,
+        "waistToArmpit": null,
+        "waistToHips": null,
+        "hips": "hip",
+        "waist": "waist",
+        "shoulderToElbow": null,
+        "shoulderToWrist": "arm-length",
+        "wrist": "wrist"
+      }
+    },
+    "trousers": {
+      "design": "charlie",
+      "package": "@freesewing/charlie",
+      "required": {
+        "crossSeam": null,
+        "crossSeamFront": null,
+        "knee": null,
+        "seat": "hip",
+        "seatBack": null,
+        "waist": "waist",
+        "waistBack": null,
+        "waistToFloor": null,
+        "waistToKnee": null,
+        "waistToHips": null,
+        "waistToSeat": null,
+        "waistToUpperLeg": null
+      }
+    },
+    "skirt": {
+      "design": "penelope",
+      "package": "@freesewing/penelope",
+      "required": {
+        "waist": "waist",
+        "seat": "hip",
+        "waistToHips": null,
+        "waistToSeat": null,
+        "waistToKnee": null
+      }
+    }
+  }
+}

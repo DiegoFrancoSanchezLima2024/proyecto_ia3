@@ -1,0 +1,2 @@
+sujeto_id,sexo_modelo,perfil_prenda,rango_edad,estatura_cm_1,estatura_cm_2,peso_kg_1,peso_kg_2,version_consentimiento,fecha_consentimiento,elegible,motivo_exclusion
+SATRE_0001,0,saco_falda,18_29,,,,,CONSENTIMIENTO-SATRE-1.0,,true,

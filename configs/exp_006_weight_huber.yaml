@@ -1,0 +1,9 @@
+# Ablacion prioritaria: reproduce la entrada antropometrica de BMnet.
+# El peso se normaliza solo con estadisticas de train para evitar fuga de datos.
+extends: default.yaml
+
+dataset:
+  use_weight_meta: true
+
+training:
+  loss: huber

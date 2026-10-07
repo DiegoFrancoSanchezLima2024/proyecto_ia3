@@ -1,0 +1,143 @@
+# ============================================================
+# Sastre-IA - baseline antropometrico reproducible
+# Perfil seguro para una RTX 3050 Laptop de 6 GB
+# ============================================================
+
+project:
+  name: sastre-ia
+  description: "Estimacion antropometrica multivista para patronaje formal"
+  version: "0.2.0"
+  seed: 42
+
+paths:
+  bodym_root:  "dataset/bodym"
+  data_root:   "dataset/bodym_clean"
+  synthetic:   "dataset/synthetic"
+  local:       "dataset/local/processed"
+  pretrained:  "pretrained"
+  experiments: "experiments"
+  sam_ckpt:    "pretrained/sam/sam_vit_b_01ec64.pth"
+  smplx_model: "pretrained/smplx"
+
+dataset:
+  img_size: 320
+  views: ["front", "left"]
+  view_directories:
+    front: "mask"
+    left: "mask_left"
+  raw_split_directories:
+    train: "train"
+    val: "train"
+    calibration: "train"
+    test: "testA"
+    test_wild: "testB"
+  # Las 13 medidas disponibles en measurements.csv de BodyM.
+  # height_cm se usa como ancla metrica y no como objetivo.
+  measurements:
+    - chest
+    - waist
+    - hip
+    - thigh
+    - calf
+    - ankle
+    - arm-length
+    - forearm
+    - wrist
+    - bicep
+    - shoulder-breadth
+    - leg-length
+    - shoulder-to-crotch
+  height_col: height_cm
+  weight_col: weight_kg
+  # El baseline historico no usa peso. Activarlo crea un modelo distinto que
+  # exige peso en entrenamiento e inferencia y conserva compatibilidad anterior.
+  use_weight_meta: false
+  gender_col: gender
+  strict_images: true
+  val_ratio: 0.15
+  calibration_ratio: 0.15
+  min_white_ratio: 0.03
+  max_white_ratio: 0.95
+
+model:
+  encoder: "efficientnet_b0"
+  encoder_pretrained: true
+  encoder_frozen_epochs: 5
+  adapt_batchnorm_epochs: 3
+  embed_dim: 256
+  n_heads: 4
+  n_layers: 2
+  dropout: 0.20
+  # La geometria se mantiene como ablacion. El baseline correcto empieza sin
+  # ella porque las secciones fijas de la silueta son sensibles a brazos/pose.
+  use_geometry: false
+  # El promedio global del CNN pierde ubicacion vertical. Esta rama opcional
+  # conserva perfiles de ancho por altura para una ablacion posterior.
+  use_profile_features: false
+  profile_bins: 32
+  predict_uncertainty: true
+
+training:
+  epochs: 45
+  batch_size: 16
+  eval_batch_size: 32
+  learning_rate: 2.0e-4
+  encoder_learning_rate: 3.0e-5
+  weight_decay: 1.0e-4
+  scheduler: cosine
+  warmup_epochs: 3
+  amp: true
+  grad_accumulation: 2
+  grad_clip: 1.0
+  early_stopping_patience: 8
+  early_stopping_min_delta: 0.01
+  num_workers: 2
+  pin_memory: true
+  persistent_workers: true
+  prefetch_factor: 2
+  subject_balanced_sampling: false
+  channels_last: true
+  allow_tf32: true
+  cudnn_benchmark: true
+  deterministic: false
+  loss: heteroscedastic_huber
+  huber_delta_normalized: 1.0
+  lambda_coherence: 0.0
+
+augmentation:
+  enabled: true
+  rotation_limit: 4.0
+  morphology_kernel: 3
+  morphology_probability: 0.20
+  gaussian_noise_std: 0.015
+  gaussian_noise_probability: 0.20
+  blur_probability: 0.15
+
+conformal:
+  coverage: 0.90
+  unreliable_threshold: 5.0
+
+evaluation:
+  metrics:
+    - mae
+    - rmse
+    - median_ae
+    - p90_ae
+    - pct_within_1cm
+    - pct_within_2cm
+    - pct_within_3cm
+    - bias
+  bland_altman: true
+  stratify_by: [gender, bmi_category, height_quartile]
+  bootstrap_iters: 1000
+
+hardware:
+  device: cuda
+  gpu_memory_gb: 6.0
+  precision: 16
+  monitor_vram: true
+
+logging:
+  backend: json
+  save_top_k: 1
+  log_every_n_steps: 20

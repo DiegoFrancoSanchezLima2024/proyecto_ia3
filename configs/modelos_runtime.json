@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "medicion_oficial": {
+    "protocolo": "dos_vistas_bodym",
+    "entradas": ["foto_frontal", "foto_lateral_izquierda", "estatura_cm"],
+    "pose": {
+      "nombre": "MediaPipe Pose Landmarker Lite",
+      "artefacto": "pretrained/mediapipe/pose_landmarker_lite.task",
+      "dispositivo": "cpu"
+    },
+    "segmentacion": {
+      "nombre": "SAM 2.1 Hiera Small",
+      "artefacto": "pretrained/sam2/sam2.1_hiera_small.pt",
+      "codigo": "vendor/sam2",
+      "dispositivo": "cuda"
+    },
+    "regresion": {
+      "nombre": "exp_008_perfiles_arboles",
+      "directorio": "experiments/exp_008_perfiles_arboles",
+      "backend": "profiles",
+      "dispositivo": "cpu",
+      "salidas": ["peso_kg", "13_medidas_cm", "intervalos_conformales"]
+    }
+  },
+  "patronaje": {
+    "motor": "FreeSewing 4.10.1",
+    "saco": "@freesewing/jaeger",
+    "pantalon": "@freesewing/charlie",
+    "falda": "@freesewing/penelope",
+    "regla": "Las medidas estimadas producen un borrador. Solo medidas confirmadas permiten declarar listo para corte."
+  },
+  "vestidor": {
+    "motor": "FASHN VTON 1.5",
+    "artefacto": "pretrained/fashn-vton-1.5",
+    "entorno_conda": "sastre-ia-fashn",
+    "variable_habilitacion": "SATRE_ENABLE_EXPERIMENTAL_TRYON",
+    "perfil_demo_en_vivo": {
+      "pasos": 30,
+      "candidatos": 1,
+      "semilla": 42,
+      "timeout_minutos": 12
+    },
+    "postproceso": ["seleccion_tecnica", "schp_atr", "restauracion_fondo_cara_pelo_manos"],
+    "inpainting_local_verificado": {
+      "estado": "checkpoint_verificado_no_integrado",
+      "nombre": "Stable Diffusion v1.5 Inpainting",
+      "artefacto": "pretrained/stable-diffusion-inpainting",
+      "precision": "fp16",
+      "offload": "model_cpu_offload",
+      "benchmark": {
+        "resolucion": "512x512",
+        "pasos": 20,
+        "segundos": 8.49,
+        "vram_pico_gb": 1.911,
+        "gpu": "NVIDIA GeForce RTX 3050 6GB Laptop GPU"
+      },
+      "uso_planificado": ["calzado", "restos_falda", "bajos_pantalon"]
+    },
+    "limitacion": "Visualiza apariencia; no valida ajuste, holgura ni caida fisica."
+  },
+  "apoyo_visual": {
+    "parsing": {
+      "nombre": "SCHP-ATR ONNX INT8",
+      "artefacto": "pretrained/schp-atr/onnx/schp-atr-18-int8-static.onnx",
+      "uso": "compositor_2d_diagnostico_y_restauracion_identidad_fashn",
+      "dispositivo": "cpu"
+    }
+  },
+  "excluidos_del_runtime_oficial": [
+    {
+      "nombre": "SHAPY + SMPL-X",
+      "rutas": ["pretrained/body3d", "pretrained/smplx"],
+      "motivo": "No esta conectado al protocolo de dos fotos y no mejora las metricas oficiales actuales."
+    },
+    {
+      "nombre": "exp_001 a exp_007",
+      "rutas": ["experiments/exp_001_baseline", "experiments/exp_007_multitarea_sin_peso"],
+      "motivo": "Se conservan como evidencia de experimentos y ablaciones, pero no se cargan en la demo."
+    },
+    {
+      "nombre": "entorno VTON anterior",
+      "rutas": ["envs/environment-vton.yml", "vendor/catvton"],
+      "motivo": "Ruta historica; el vestidor seleccionado es FASHN VTON."
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+sujeto_id,sesion_id,ronda,vista,ruta_imagen,camara_id,resolucion,orientacion,distancia_cm,altura_camara_cm,condicion_ropa,cuerpo_completo,pies_visibles,manos_visibles,pose_valida,enfoque_valido,luz_valida,mascara_valida,aceptada,motivo_rechazo,sha256
+SATRE_0001,SATRE_0001_S01,1,frente,dataset/local/raw/SATRE_0001/ronda_01/frente.jpg,telefono_01,3456x4608,vertical,300,88,cenida,true,true,true,true,true,true,true,true,,

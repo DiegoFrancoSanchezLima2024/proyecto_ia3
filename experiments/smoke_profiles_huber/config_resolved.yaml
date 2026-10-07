@@ -1,0 +1,124 @@
+project:
+  name: sastre-ia
+  description: Estimacion antropometrica multivista para patronaje formal
+  version: 0.2.0
+  seed: 42
+paths:
+  bodym_root: dataset/bodym
+  data_root: dataset/bodym_clean
+  synthetic: dataset/synthetic
+  local: dataset/local/processed
+  pretrained: pretrained
+  experiments: experiments
+  sam_ckpt: pretrained/sam/sam_vit_b_01ec64.pth
+  smplx_model: pretrained/smplx
+dataset:
+  img_size: 320
+  views:
+  - front
+  - left
+  view_directories:
+    front: mask
+    left: mask_left
+  raw_split_directories:
+    train: train
+    val: train
+    calibration: train
+    test: testA
+    test_wild: testB
+  measurements:
+  - chest
+  - waist
+  - hip
+  - thigh
+  - calf
+  - ankle
+  - arm-length
+  - forearm
+  - wrist
+  - bicep
+  - shoulder-breadth
+  - leg-length
+  - shoulder-to-crotch
+  height_col: height_cm
+  weight_col: weight_kg
+  gender_col: gender
+  strict_images: true
+  val_ratio: 0.15
+  calibration_ratio: 0.15
+  min_white_ratio: 0.03
+  max_white_ratio: 0.95
+model:
+  encoder: efficientnet_b0
+  encoder_pretrained: true
+  encoder_frozen_epochs: 5
+  adapt_batchnorm_epochs: 3
+  embed_dim: 256
+  n_heads: 4
+  n_layers: 2
+  dropout: 0.2
+  use_geometry: false
+  use_profile_features: true
+  profile_bins: 32
+  predict_uncertainty: true
+training:
+  epochs: 1
+  batch_size: 16
+  eval_batch_size: 32
+  learning_rate: 0.0002
+  encoder_learning_rate: 3.0e-05
+  weight_decay: 0.0001
+  scheduler: cosine
+  warmup_epochs: 3
+  amp: true
+  grad_accumulation: 2
+  grad_clip: 1.0
+  early_stopping_patience: 8
+  early_stopping_min_delta: 0.01
+  num_workers: 2
+  pin_memory: true
+  persistent_workers: true
+  prefetch_factor: 2
+  channels_last: true
+  allow_tf32: true
+  cudnn_benchmark: true
+  deterministic: false
+  loss: huber
+  huber_delta_normalized: 1.0
+  lambda_coherence: 0.0
+augmentation:
+  enabled: true
+  rotation_limit: 4.0
+  morphology_kernel: 3
+  morphology_probability: 0.2
+  gaussian_noise_std: 0.015
+  gaussian_noise_probability: 0.2
+  blur_probability: 0.15
+conformal:
+  coverage: 0.9
+  unreliable_threshold: 5.0
+evaluation:
+  metrics:
+  - mae
+  - rmse
+  - median_ae
+  - p90_ae
+  - pct_within_1cm
+  - pct_within_2cm
+  - pct_within_3cm
+  - bias
+  bland_altman: true
+  stratify_by:
+  - gender
+  - bmi_category
+  - height_quartile
+  bootstrap_iters: 1000
+hardware:
+  device: cuda
+  gpu_memory_gb: 6.0
+  precision: 16
+  monitor_vram: true
+logging:
+  backend: json
+  save_top_k: 1
+  log_every_n_steps: 20

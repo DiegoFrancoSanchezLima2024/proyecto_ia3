@@ -1,0 +1,40 @@
+name: sastre-ia-body3d
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  # Misma base GPU que el entorno principal ya validado en esta máquina.
+  - python=3.11
+  - pytorch=2.3.1
+  - torchvision=0.18.1
+  - pytorch-cuda=12.1
+  - numpy<2
+  - scipy
+  - scikit-image
+  - scikit-learn
+  - pillow
+  - matplotlib
+  - opencv
+  - pyyaml
+  - tqdm
+  # OmegaConf 2.0.6 (requerido por el esquema original de SHAPY) usa
+  # metadatos que pip >= 24.1 rechaza.
+  - pip=23.3.2
+  - pip:
+      - smplx==0.1.28
+      - jpeg4py==0.1.4
+      - kornia==0.4.1
+      - loguru==0.7.3
+      - omegaconf==2.0.6
+      - open3d==0.19.0
+      - PyOpenGL==3.1.0
+      - pyrender==0.1.45
+      - threadpoolctl==3.2.0
+      - trimesh==3.23.5
+      - yacs==0.1.8
+      - fvcore==0.1.5.post20221221
+
+# Entorno independiente: no instalar estas dependencias en sastre-ia ni en
+# sastre-ia-perception. La comunicación se hará mediante JSON/NPZ en disco.

@@ -1,0 +1,23 @@
+name: sastre-ia-perception
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pytorch=2.5.1
+  - torchvision=0.20.1
+  - pytorch-cuda=12.1
+  - numpy<2
+  - pillow
+  - pyyaml
+  - opencv
+  - pip
+  - pip:
+      - pytest>=8
+      - mediapipe>=0.10,<0.11
+      - opencv-contrib-python>=4.10,<4.12
+
+# SAM 2 se instala desde su repositorio oficial después de crear este entorno.
+# Se mantiene separado de sastre-ia (Torch 2.3.1) para no invalidar exp_006.

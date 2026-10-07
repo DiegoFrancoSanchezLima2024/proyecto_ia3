@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SATRE-IA · Taller local</title>
+<style>
+:root{--bg:#050908;--surface:rgba(12,22,22,.92);--surface-2:rgba(20,33,33,.82);--border:rgba(92,255,211,.10);--border-strong:rgba(92,255,211,.22);--text:#f3fffb;--muted:#89aaa1;--accent:#3ce7b5;--accent-2:#56c7ff;--accent-ink:#02130e;--amber:#f0b84e;--pink:#e87ecb;--blue:#4ecbe8;--violet:#9e8ef0;--orange:#f0a35a}
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--bg);background-image:linear-gradient(rgba(60,231,181,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(60,231,181,.025) 1px,transparent 1px),radial-gradient(circle at 75% 0,rgba(86,199,255,.07),transparent 34%);background-size:38px 38px,38px 38px,auto;color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:18px 4%;border-bottom:1px solid var(--border);display:flex;align-items:center;background:rgba(5,9,8,.86);backdrop-filter:blur(18px);position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:20px;letter-spacing:.06em}
+.brand-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:inline-block;box-shadow:0 0 28px rgba(60,231,181,.35);position:relative}
+.brand-mark::after{content:'';position:absolute;inset:8px;border:1px solid rgba(2,19,14,.55);border-radius:4px}
+.status-pill{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:var(--surface);border:1px solid var(--border-strong);font-size:12.5px;font-weight:700;color:var(--muted)}
+.status-pill i{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;box-shadow:0 0 8px var(--accent)}
+h1{margin:0;font-size:16px}
+main{display:grid;grid-template-columns:minmax(330px,430px) 1fr;gap:20px;padding:26px 4% 60px;max-width:1500px;margin:0 auto}
+.card{position:relative;background:linear-gradient(145deg,rgba(18,30,30,.96),rgba(9,17,17,.94));border:1px solid var(--border);border-radius:18px;padding:22px 22px 22px 26px;margin-bottom:18px;box-shadow:0 18px 60px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.025);overflow:hidden}
+.card::before{content:'';position:absolute;left:0;top:20px;bottom:20px;width:3px;border-radius:3px;background:linear-gradient(var(--accent),var(--accent-2));box-shadow:0 0 16px rgba(60,231,181,.5)}
+.card::after{content:'';position:absolute;right:-80px;top:-80px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(86,199,255,.06),transparent 68%);pointer-events:none}
+h2{font-size:16px;margin:0 0 14px;font-weight:700;letter-spacing:.01em}
+h3{margin:4px 0;font-size:16px}
+p{line-height:1.5}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+label{display:block;margin:10px 0;font-size:12.5px;color:var(--muted);font-weight:600}
+input,select{display:block;width:100%;padding:11px;margin-top:5px;border:1px solid var(--border-strong);border-radius:10px;background:rgba(7,15,15,.72);color:var(--text);font:inherit;outline:none;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(60,231,181,.10)}
+input::placeholder{color:#5c6d68}
+input[type=file]{padding:8px;font-size:12.5px}
+input[type=range]{padding:0;accent-color:var(--accent)}
+button,a.download{display:inline-block;background:linear-gradient(135deg,var(--accent),#2fcfba);color:var(--accent-ink);border:0;padding:11px 17px;border-radius:10px;cursor:pointer;text-decoration:none;margin:4px 6px 4px 0;font-weight:800;font-size:13.5px;box-shadow:0 8px 24px rgba(60,231,181,.12);transition:opacity .15s,transform .15s,box-shadow .15s}
+button:hover:not(:disabled),a.download:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(60,231,181,.22)}
+button:disabled{opacity:.35;cursor:not-allowed}
+button.secondary{background:var(--surface-2);color:var(--text);border:1px solid var(--border-strong)}
+.tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.tabs button{margin:0;background:var(--surface-2);color:var(--muted);border:1px solid var(--border-strong);font-weight:700}
+.tabs button.active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.note,#estadoGeneral,#estadoMedicion{padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;white-space:pre-wrap;font-size:13.5px}
+#estadoGeneral:empty{display:none}
+.muted,small{color:var(--muted)}
+#campoMedidas{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+#vistaPrevia{height:58vh;overflow:auto;background:#fff;border-radius:12px;border:1px solid var(--border)}
+#vistaPrevia img{display:block;width:100%;height:auto}
+canvas{display:block;width:100%;max-height:70vh;background:#e8e8e8;border-radius:10px;object-fit:contain}
+.actions{margin-top:12px}
+[hidden]{display:none!important}
+.source{display:inline-block;margin-left:5px;padding:1px 7px;border-radius:9px;background:rgba(51,224,173,.15);color:var(--accent);font-size:10px;font-weight:700}
+.source.derived{background:rgba(240,184,78,.16);color:var(--amber)}
+#resumenPrediccion{margin-top:16px}
+#resumenPrediccion strong{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+#resumenPrediccion table{width:100%;border-collapse:separate;border-spacing:0 6px;margin-top:8px;font-size:12.5px}
+#resumenPrediccion th{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.06em;text-align:left;padding:0 10px 2px}
+#resumenPrediccion td{padding:9px 10px;background:var(--surface-2)}
+#resumenPrediccion tbody tr td:first-child{border-left:3px solid var(--row-c,var(--accent));border-radius:8px 0 0 8px;font-weight:700}
+#resumenPrediccion tbody tr td:last-child{border-radius:0 8px 8px 0}
+#resumenPrediccion tbody tr:nth-child(6n+1){--row-c:var(--accent)}
+#resumenPrediccion tbody tr:nth-child(6n+2){--row-c:var(--blue)}
+#resumenPrediccion tbody tr:nth-child(6n+3){--row-c:var(--amber)}
+#resumenPrediccion tbody tr:nth-child(6n+4){--row-c:var(--pink)}
+#resumenPrediccion tbody tr:nth-child(6n+5){--row-c:var(--violet)}
+#resumenPrediccion tbody tr:nth-child(6n+6){--row-c:var(--orange)}
+.eyebrow{display:inline-block;padding:5px 11px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border-strong);color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.03em;margin-bottom:10px}
+.diagnostic-card{border:1px solid var(--border);border-radius:14px;padding:18px;background:var(--surface-2)}
+.diagnostic-card canvas{margin-top:10px}
+.diagnostic-note{margin:6px 0 12px;color:var(--muted);font-size:13px}
+.tryon-stage{margin-top:12px}
+.vestidor-launch{padding:20px;border:1px solid var(--border-strong);border-radius:14px;background:linear-gradient(135deg,rgba(51,224,173,.08),transparent 60%),var(--surface-2)}
+.reference-frame img,.result-media img{width:100%;object-fit:contain;background:var(--surface-2);border:1px solid var(--border);border-radius:14px}
+.reference-frame img{max-height:60vh}
+.tryon-note{font-size:12.5px;color:var(--muted);border-left:3px solid var(--amber);padding-left:10px;margin:10px 0}
+.tryon-actions{margin-top:12px}
+.result-hero{margin-top:20px;padding:20px;border:1px solid var(--border-strong);border-radius:16px;background:linear-gradient(180deg,rgba(51,224,173,.06),transparent 40%),var(--surface);display:grid;grid-template-columns:minmax(220px,420px) 1fr;gap:22px;align-items:start}
+.result-media img{max-height:75vh}
+.mode-tag{display:inline-block;padding:5px 11px;border-radius:999px;background:rgba(240,184,78,.14);border:1px solid rgba(240,184,78,.4);color:var(--amber);font-size:11px;font-weight:700;letter-spacing:.03em;margin-bottom:8px}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chip{display:inline-flex;align-items:center;padding:6px 11px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border-strong);color:var(--text);font-size:11.5px;font-weight:700}
+.chip-good{background:rgba(51,224,173,.14);border-color:rgba(51,224,173,.4);color:var(--accent)}
+.chip-warn{background:rgba(240,184,78,.14);border-color:rgba(240,184,78,.45);color:var(--amber)}
+.result-caption{color:var(--muted);font-size:12px;margin-top:8px}
+.layered-result{margin:14px 0;padding:16px;border:1px solid var(--border-strong);border-radius:14px;background:var(--surface-2)}
+.layered-result img{display:block;width:100%;max-height:78vh;object-fit:contain;background:#fff;border-radius:10px}
+.technical-details{margin-top:16px;border-top:1px solid var(--border);padding-top:12px}
+.technical-details summary{cursor:pointer;font-weight:700;color:var(--muted);font-size:13px}
+details summary{cursor:pointer}
+@media(max-width:900px){main{grid-template-columns:1fr}#vistaPrevia{height:48vh}}
+@media(max-width:720px){.tryon-stage,.result-hero{grid-template-columns:1fr}}
+</style>
+<header><div class="brand"><span class="brand-mark"></span>SATRE-IA</div></header>
+<main><aside>
+<section class="card"><h2>1. Expediente de la persona</h2>
+<label>Expedientes guardados en este navegador<select id="perfiles"><option value="">Nuevo expediente</option></select></label>
+<div class="grid2"><label>Nombre o código<input id="nombrePersona" placeholder="Ej. cliente-001"></label><label>Conjunto a confeccionar<select id="sexo"><option value="male">Saco + pantalón</option><option value="female">Saco + falda</option></select></label></div>
+<label>Estatura (acepta 164 cm o 1.64 m)<input id="estatura" inputmode="decimal" placeholder="Ej. 164 o 1.64"></label>
+<button id="guardarPerfil">Guardar expediente</button> <button class="secondary" id="nuevoPerfil">Nuevo</button>
+</section>
+<section class="card"><h2>2. Fotografías y predicción</h2>
+<label>Foto frontal (también se usa para la vista 2D)<input id="fotoFrontal" type="file" accept="image/*"></label>
+<div class="grid2"><label>Perfil izquierdo<input id="fotoIzquierda" type="file" accept="image/*"></label><label>Ajuste de la ropa<select id="ajusteRopa"><option value="unknown" selected>No confirmado</option><option value="tight">Ceñida</option><option value="loose">Holgada (repetir fotos)</option></select></label></div>
+<button id="medirFotos">Sacar medidas de las fotos</button>
+<button id="descargarPrediccion" class="secondary" hidden>Descargar medidas JSON</button>
+<p id="estadoMedicion" hidden></p><p id="avisoCaptura" class="tryon-note" hidden></p><div id="resumenPrediccion" hidden></div>
+<input id="prediccionImportada" type="file" accept=".json,application/json" hidden></section>
+<section class="card"><h2>3. Prenda y medidas</h2><div id="pestanasPrenda" class="tabs"></div><div id="campoMedidas"></div>
+<label>Margen de costura (mm)<input id="margenCostura" type="number" min="0" max="30" value="10"></label>
+<button id="generarMolde">Generar molde personalizado</button></section>
+</aside><section>
+<article class="card"><h2>Molde métrico</h2><p id="estadoGeneral" role="status"></p>
+<label>Zoom<input id="zoomVista" type="range" min="40" max="220" value="100"></label><div id="vistaPrevia"></div>
+<div class="actions"><a id="enlaceSvg" class="download" hidden>SVG 1:1</a><button id="botonPdf" hidden>PDF A4</button><a id="enlaceJson" class="download" hidden>Proyecto JSON</a></div></article>
+<article class="card"><h2>Vestidor</h2>
+<div class="diagnostic-card" hidden><button id="generarDiagnosticoCompuesto" disabled>Generar diagnóstico compuesto</button><small id="estadoCompuesto"></small><div id="panelVistaCompuesta" hidden><img id="imagenCompuesta" alt="Diagnóstico interno"><p id="chipsCalidadCompuesta"></p><button id="descargarCompuesto">Descargar diagnóstico</button></div><details class="technical-details"><summary>Diagnóstico interno</summary><input id="anchoVisual" type="range" min="70" max="130" value="100"><input id="posicionVerticalVisual" type="range" min="-15" max="15" value="0"><select id="colorTela"><option value="#18263d" selected>Azul marino</option></select><canvas id="lienzoVestidor" width="900" height="1200"></canvas><button id="descargarVista2D" hidden>Descargar diagnóstico PNG</button></details></div>
+<div class="tryon-stage vestidor-launch"><h3>Prueba de vestuario personalizada</h3><button id="generarVestidorReal" disabled>Vestidor</button><small id="estadoVestidorReal">Primero procesa las fotografías.</small></div>
+<section id="panelVestidorExperimental" class="result-hero" hidden><div class="result-media"><img id="imagenVestidorExperimental" alt="Resultado del vestidor"></div><div class="result-info"><h3 id="tituloVestidorExperimental">Resultado del vestidor</h3><div id="avisoVestidorExperimental"></div><button id="descargarVestidorReal" class="secondary">Descargar imagen</button></div></section></article>
+</section></main>
+<script>
+const $=s=>document.querySelector(s),claveAlmacen='satre-ia-personas-v1';
+const specs={
+jacket:{label:'Saco',fields:{biceps:'Bíceps · contorno',chest:'Pecho · contorno',hpsToBust:'Hombro alto a pecho',hpsToWaistBack:'Hombro alto a cintura espalda',neck:'Cuello · contorno',shoulderToShoulder:'Ancho de hombros',shoulderSlope:'Inclinación de hombro (grados)',waistToArmpit:'Cintura a axila',waistToHips:'Cintura a cadera',hips:'Cadera · contorno',waist:'Cintura · contorno',shoulderToElbow:'Hombro a codo',shoulderToWrist:'Hombro a muñeca',wrist:'Muñeca · contorno'}},
+trousers:{label:'Pantalón',fields:{crossSeam:'Tiro completo',crossSeamFront:'Tiro delantero',knee:'Rodilla · contorno',seat:'Asiento/cadera · contorno',seatBack:'Mitad posterior de asiento',waist:'Cintura · contorno',waistBack:'Mitad posterior de cintura',waistToFloor:'Cintura al piso',waistToKnee:'Cintura a rodilla',waistToHips:'Cintura a cadera alta',waistToSeat:'Cintura a asiento',waistToUpperLeg:'Cintura a parte alta del muslo'}},
+skirt:{label:'Falda',fields:{waist:'Cintura · contorno',seat:'Asiento/cadera · contorno',waistToHips:'Cintura a cadera alta',waistToSeat:'Cintura a asiento',waistToKnee:'Cintura a rodilla'}}};
+const predictionMap={biceps:'bicep',chest:'chest',shoulderToShoulder:'shoulder-breadth',hips:'hip',seat:'hip',waist:'waist',shoulderToWrist:'arm-length',wrist:'wrist'};
+const measurementLabels={chest:'Pecho',waist:'Cintura',hip:'Cadera',thigh:'Muslo',calf:'Pantorrilla',ankle:'Tobillo','arm-length':'Largo de brazo',forearm:'Antebrazo',wrist:'Muñeca',bicep:'Bíceps','shoulder-breadth':'Ancho de hombros','leg-length':'Largo de pierna','shoulder-to-crotch':'Hombro a entrepierna'};
+let prenda='jacket',importado={},importadoMeta={},imagenFrontal=null,puntosFrontales=null,urls=[],ultimaCargaUtil=null,ultimaPrediccion=null,urlVestidorReal=null,urlVestidorCompuesto=null,motorVestidorListo=false;
+function numerico(value){if(value===undefined||value===null||value==='')return null;const n=Number(String(value).trim().replace(',','.'));return Number.isFinite(n)?n:null}
+function estaturaNormalizada(value){let n=numerico(value);if(n!==null&&n>=1&&n<=2.3)n*=100;return n!==null&&n>=100&&n<=230?Math.round(n*10)/10:null}
+function redondeado(value){return Math.round(value*10)/10}
+function mostrarEstadoMedicion(text,error=false){const el=$('#estadoMedicion');el.hidden=false;el.textContent=text;el.style.borderColor=error?'rgba(239,123,106,.5)':'rgba(51,224,173,.4)';el.style.background=error?'rgba(239,123,106,.1)':'rgba(51,224,173,.08)'}
+function listaPerfiles(){try{return JSON.parse(localStorage.getItem(claveAlmacen))||[]}catch{return[]}}
+function actualizarPerfiles(selected=''){const list=listaPerfiles();$('#perfiles').innerHTML='<option value="">Nuevo expediente</option>'+list.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');$('#perfiles').value=selected}
+function prendasPermitidas(){return $('#sexo').value==='male'?['jacket','trousers']:['jacket','skirt']}
+function dibujarPestanas(){if(!prendasPermitidas().includes(prenda))prenda='jacket';$('#pestanasPrenda').innerHTML=prendasPermitidas().map(k=>`<button type="button" data-g="${k}" class="${k===prenda?'active':''}">${specs[k].label}</button>`).join('');document.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{guardarCamposActuales();prenda=b.dataset.g;dibujarPestanas();dibujarCampos();dibujarVestidor()})}
+function dibujarCampos(values={}){$('#campoMedidas').innerHTML=Object.entries(specs[prenda].fields).map(([k,label])=>`<label>${label}<input data-measure="${k}" type="number" min="0.1" max="300" step="0.1" value="${values[k]??importado[k]??''}" required></label>`).join('');document.querySelectorAll('[data-measure]').forEach(i=>i.oninput=limpiarResultado)}
+function camposActuales(){return Object.fromEntries([...document.querySelectorAll('[data-measure]')].map(i=>[i.dataset.measure,i.value===''?'':Number(i.value)]))}
+function construirEntradasPatron(p){
+ const m=p.measurements||{},h=estaturaNormalizada(p.inputs?.height_cm??$('#estatura').value),get=name=>numerico(m[name]?.final_cm??m[name]?.estimate_cm);
+ importado={};importadoMeta={};
+ for(const [target,source] of Object.entries(predictionMap)){const value=get(source);if(value!==null){importado[target]=redondeado(value);importadoMeta[target]='medida IA'}}
+ const chest=get('chest'),waist=get('waist'),hip=get('hip'),arm=get('arm-length'),calf=get('calf'),leg=get('leg-length'),torso=get('shoulder-to-crotch');
+ const derived={
+  hpsToBust:h&&h*.16,hpsToWaistBack:torso&&torso*.70,neck:chest&&chest*.38,shoulderSlope:14,waistToArmpit:h&&h*.22,waistToHips:h&&h*.12,shoulderToElbow:arm&&arm*.54,
+  crossSeam:hip&&hip*.70,crossSeamFront:hip&&hip*.31,knee:calf&&calf+6,seatBack:hip&&hip*.52,waistBack:waist&&waist*.52,waistToFloor:h&&Math.max(h*.60,(leg||0)+h*.15),waistToKnee:h&&h*.34,waistToSeat:h&&h*.16,waistToUpperLeg:h&&h*.18
+ };
+ for(const [key,value] of Object.entries(derived))if(importado[key]===undefined&&Number.isFinite(value)){importado[key]=redondeado(value);importadoMeta[key]='derivada'}
+}
+function dibujarResumenPrediccion(p){const m=p.measurements||{},rows=Object.entries(measurementLabels).map(([key,label])=>{const v=m[key];if(!v)return'';const estimate=numerico(v.final_cm??v.estimate_cm),lo=numerico(v.lower_cm),hi=numerico(v.upper_cm),interval=lo!==null&&hi!==null?`${lo.toFixed(1)}–${hi.toFixed(1)}`:'—';return `<tr><td>${label}</td><td>${estimate?.toFixed(1)??'—'} cm</td><td>${interval} cm</td></tr>`}).join(''),w=p.estimated_weight,weight=w?`<p><strong>Peso estimado:</strong> ${Number(w.estimate_kg).toFixed(1)} kg${w.lower_kg!=null&&w.upper_kg!=null?` · intervalo ${Number(w.lower_kg).toFixed(1)}–${Number(w.upper_kg).toFixed(1)} kg`:''}</p>`:'';const el=$('#resumenPrediccion');el.innerHTML=`<strong>13 medidas obtenidas</strong>${weight}<table><thead><tr><th>Medida</th><th>Resultado</th><th>Intervalo</th></tr></thead><tbody>${rows}</tbody></table>`;el.hidden=false}
+function guardarCamposActuales(){const id=$('#perfiles').value;if(!id)return;const list=listaPerfiles(),p=list.find(x=>x.id===id);if(p){p.garments??={};p.garments[prenda]=camposActuales();localStorage.setItem(claveAlmacen,JSON.stringify(list))}}
+function limpiarResultado(){for(const u of urls)URL.revokeObjectURL(u);urls=[];$('#vistaPrevia').replaceChildren();for(const id of ['enlaceSvg','botonPdf','enlaceJson'])$('#'+id).hidden=true;ultimaCargaUtil=null}
+function reiniciarFotos(){for(const id of ['fotoFrontal','fotoIzquierda'])$('#'+id).value='';imagenFrontal=null;puntosFrontales=null;ultimaPrediccion=null;urlVestidorReal=null;urlVestidorCompuesto=null;$('#descargarPrediccion').hidden=true;$('#panelVestidorExperimental').hidden=true;$('#panelVistaCompuesta').hidden=true;$('#generarVestidorReal').disabled=true;$('#generarDiagnosticoCompuesto').disabled=true;$('#resumenPrediccion').hidden=true;$('#estadoMedicion').hidden=true;$('#avisoCaptura').hidden=true;actualizarDisponibilidadVestidor();dibujarVestidor();actualizarEjemploReferencia()}
+function actualizarEjemploReferencia(){}
+function actualizarDisponibilidadVestidor(){const hasSession=Boolean(ultimaPrediccion?.local_session?.id),button=$('#generarVestidorReal');button.disabled=!(motorVestidorListo&&hasSession);button.textContent='Vestidor';$('#estadoVestidorReal').textContent=motorVestidorListo?(hasSession?'Listo para generar la visualización del conjunto.':'Primero procesa las fotografías.'):'Inicia la demo con el vestidor habilitado.';$('#generarDiagnosticoCompuesto').disabled=!hasSession;$('#estadoCompuesto').textContent=hasSession?'Diagnóstico interno disponible.':''}
+async function cargarEstadoVestidor(){try{const r=await fetch('/api/tryon/status'),s=await r.json();motorVestidorListo=Boolean(r.ok&&s.ready)}catch{motorVestidorListo=false}actualizarDisponibilidadVestidor()}
+$('#sexo').onchange=()=>{urlVestidorReal=null;$('#panelVestidorExperimental').hidden=true;dibujarPestanas();dibujarCampos();dibujarVestidor();actualizarEjemploReferencia()};
+$('#guardarPerfil').onclick=()=>{const height=estaturaNormalizada($('#estatura').value);if(!height){mostrarEstadoMedicion('Estatura inválida. Escribe 164 cm o 1.64 m.',true);return}$('#estatura').value=height;guardarCamposActuales();let list=listaPerfiles(),id=$('#perfiles').value||crypto.randomUUID(),p=list.find(x=>x.id===id);if(!p){p={id,garments:{}};list.push(p)}p.name=$('#nombrePersona').value.trim()||`persona-${list.indexOf(p)+1}`;p.sex=$('#sexo').value;p.height=height;p.garments[prenda]=camposActuales();localStorage.setItem(claveAlmacen,JSON.stringify(list));actualizarPerfiles(id);$('#estadoGeneral').textContent='Expediente guardado localmente.'};
+$('#nuevoPerfil').onclick=()=>{$('#perfiles').value='';for(const id of ['nombrePersona','estatura'])$('#'+id).value='';importado={};importadoMeta={};reiniciarFotos();dibujarCampos();limpiarResultado()};
+$('#perfiles').onchange=()=>{const p=listaPerfiles().find(x=>x.id===$('#perfiles').value);if(!p){reiniciarFotos();return}reiniciarFotos();$('#nombrePersona').value=p.name;$('#sexo').value=p.sex;$('#estatura').value=p.height??'';dibujarPestanas();dibujarCampos(p.garments?.[prenda]||{});limpiarResultado()};
+function aplicarPrediccion(p){const m=p.measurements||{};ultimaPrediccion=p;urlVestidorReal=null;urlVestidorCompuesto=null;$('#panelVestidorExperimental').hidden=true;$('#panelVistaCompuesta').hidden=true;construirEntradasPatron(p);
+ const captureWarnings=[];
+ if(p.decision==='repeat_capture')captureWarnings.push('El sistema recomienda repetir la captura de fotos antes de confiar en estas medidas.');
+ if(Array.isArray(p.quality?.warnings))captureWarnings.push(...p.quality.warnings);
+ const captureWarnEl=$('#avisoCaptura');
+ if(captureWarnings.length){captureWarnEl.hidden=false;captureWarnEl.textContent='⚠ '+captureWarnings.join(' · ')}else{captureWarnEl.hidden=true}puntosFrontales=p.preview_2d?.front_landmarks||null;const height=estaturaNormalizada(p.inputs?.height_cm??$('#estatura').value);if(height)$('#estatura').value=height;if(p.inputs?.garment_route)$('#sexo').value=p.inputs.garment_route;if(p.decision==='repeat_capture'){importado={};importadoMeta={}}dibujarPestanas();dibujarCampos();dibujarResumenPrediccion(p);$('#descargarPrediccion').hidden=false;actualizarDisponibilidadVestidor();dibujarVestidor();const pending=Object.values(m).filter(x=>x.requires_manual_confirmation).length;const message=p.decision==='repeat_capture'?'Captura rechazada: repite las dos fotos antes de generar moldes.':`Medición terminada: ${Object.keys(m).length} medidas y peso estimado.${pending?` ${pending} medidas requieren revisión.`:''}`;mostrarEstadoMedicion(message,p.decision==='repeat_capture');$('#estadoGeneral').textContent=p.decision==='repeat_capture'?message:'Medidas cargadas. Selecciona una prenda y genera el molde personalizado.'}
+$('#prediccionImportada').onchange=async e=>{try{aplicarPrediccion(JSON.parse(await e.target.files[0].text()))}catch{mostrarEstadoMedicion('No se pudo leer la predicción JSON.',true)}};
+$('#descargarPrediccion').onclick=()=>{if(!ultimaPrediccion)return;const u=URL.createObjectURL(new Blob([JSON.stringify(ultimaPrediccion,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=u;a.download=`medidas_${persona().name}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
+async function cargaUtilFoto(input){const file=input.files[0];if(!file)return null;if(file.size>12*1024*1024)throw Error(`${file.name} supera 12 MB.`);const bytes=new Uint8Array(await file.arrayBuffer());let binary='';for(let i=0;i<bytes.length;i+=32768)binary+=String.fromCharCode(...bytes.subarray(i,i+32768));return{type:file.type,base64:btoa(binary)}}
+$('#medirFotos').onclick=async()=>{const button=$('#medirFotos');button.disabled=true;try{if(!$('#fotoFrontal').files[0]||!$('#fotoIzquierda').files[0])throw Error('Se necesitan únicamente la foto frontal y el perfil izquierdo.');const height=estaturaNormalizada($('#estatura').value);if(!height)throw Error('Estatura inválida. Escribe 164 cm o 1.64 m.');$('#estatura').value=height;const progress='Procesando localmente: pose, dos siluetas, peso y 13 medidas. Puede tardar varios minutos; no cierres esta página…';mostrarEstadoMedicion(progress);$('#estadoGeneral').textContent=progress;const photos={front:await cargaUtilFoto($('#fotoFrontal')),left:await cargaUtilFoto($('#fotoIzquierda'))};const r=await fetch('/api/measure',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({photos,height_cm:height,sex:$('#sexo').value,clothing_fit:$('#ajusteRopa').value})}),p=await r.json();if(!r.ok)throw Error(p.error);aplicarPrediccion(p)}catch(e){mostrarEstadoMedicion(e.message,true);$('#estadoGeneral').textContent=e.message}finally{button.disabled=false}};
+$('#fotoFrontal').onchange=e=>{const f=e.target.files[0];if(!f)return;puntosFrontales=null;const img=new Image(),u=URL.createObjectURL(f);img.onload=()=>{imagenFrontal=img;URL.revokeObjectURL(u);dibujarVestidor()};img.src=u};
+function persona(){return{id:$('#perfiles').value||null,name:$('#nombrePersona').value.trim()||'sin-nombre',sex:$('#sexo').value,height_cm:estaturaNormalizada($('#estatura').value),estimated_weight_kg:numerico(ultimaPrediccion?.estimated_weight?.estimate_kg)}}
+$('#generarMolde').onclick=async()=>{limpiarResultado();const height=estaturaNormalizada($('#estatura').value);if(!height){$('#estadoGeneral').textContent='Estatura inválida. Escribe 164 cm o 1.64 m.';return}$('#estatura').value=height;const measurements=camposActuales(),missing=Object.entries(measurements).filter(([,v])=>v==='').map(([k])=>specs[prenda].fields[k]);if(missing.length){$('#estadoGeneral').textContent='Faltan medidas:\n- '+missing.join('\n- ')+'\nPrimero pulsa “Sacar medidas de las fotos”.';return}const button=$('#generarMolde');button.disabled=true;$('#estadoGeneral').textContent='Trazando el molde personalizado…';try{ultimaCargaUtil={garment:prenda,sex:$('#sexo').value,person:persona(),measurements,seam_allowance_mm:Number($('#margenCostura').value),session_id:ultimaPrediccion?.local_session?.id||null,measurement_sources:Object.fromEntries(Object.keys(measurements).map(k=>[k,importadoMeta[k]||'manual']))};const r=await fetch('/api/pattern',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(ultimaCargaUtil)}),result=await r.json();if(!r.ok)throw Error(result.error);const preview=result.svg.replace(/<g id="sastre-ia-unvalidated">[\s\S]*?<\/g><\/svg>\s*$/,'</svg>'),pu=URL.createObjectURL(new Blob([preview],{type:'image/svg+xml'})),su=URL.createObjectURL(new Blob([result.svg],{type:'image/svg+xml'}));urls.push(pu,su);const img=new Image();img.src=pu;img.alt=`Molde ${result.garment_label}`;$('#vistaPrevia').append(img);$('#enlaceSvg').href=su;$('#enlaceSvg').download=`${prenda}_${persona().name}_1a1.svg`;$('#enlaceSvg').hidden=false;const {svg,...project}=result,ju=URL.createObjectURL(new Blob([JSON.stringify(project,null,2)],{type:'application/json'}));urls.push(ju);$('#enlaceJson').href=ju;$('#enlaceJson').download=`${prenda}_${persona().name}.json`;$('#enlaceJson').hidden=false;$('#botonPdf').hidden=false;$('#estadoGeneral').textContent=`Molde personalizado generado\n${result.garment_label} · ${Math.round(result.width_mm)} × ${Math.round(result.height_mm)} mm · escala 1:1`;guardarCamposActuales()}catch(e){$('#estadoGeneral').textContent=e.message}finally{button.disabled=false}};
+$('#botonPdf').onclick=async()=>{if(!ultimaCargaUtil)return;$('#botonPdf').disabled=true;try{const r=await fetch('/api/pattern/pdf',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(ultimaCargaUtil)});if(!r.ok)throw Error((await r.json()).error);const u=URL.createObjectURL(await r.blob());urls.push(u);const a=document.createElement('a');a.href=u;a.download=`${prenda}_${persona().name}_A4.pdf`;a.click()}catch(e){$('#estadoGeneral').textContent=e.message}finally{$('#botonPdf').disabled=false}};
+$('#zoomVista').oninput=e=>{const img=$('#vistaPrevia img');if(img)img.style.width=e.target.value+'%'};
+function dibujarVestidor(){
+ const c=$('#lienzoVestidor'),x=c.getContext('2d');x.clearRect(0,0,c.width,c.height);
+ if(!imagenFrontal){x.fillStyle='#68736d';x.font='24px system-ui';x.textAlign='center';x.fillText('Sube la foto frontal para ver el traje',c.width/2,c.height/2);$('#descargarVista2D').hidden=true;return}
+ const ratio=Math.min(c.width/imagenFrontal.width,c.height/imagenFrontal.height),w=imagenFrontal.width*ratio,h=imagenFrontal.height*ratio,ox=(c.width-w)/2,oy=(c.height-h)/2;
+ x.drawImage(imagenFrontal,ox,oy,w,h);
+ const scale=Number($('#anchoVisual').value)/100,dy=Number($('#posicionVerticalVisual').value)*6,color=$('#colorTela').value;
+ const fallback=[...Array(33)].map(()=>({x:.5,y:.5,visibility:1}));Object.assign(fallback[11],{x:.38,y:.25});Object.assign(fallback[12],{x:.62,y:.25});Object.assign(fallback[13],{x:.31,y:.39});Object.assign(fallback[14],{x:.69,y:.39});Object.assign(fallback[15],{x:.27,y:.52});Object.assign(fallback[16],{x:.73,y:.52});Object.assign(fallback[23],{x:.43,y:.52});Object.assign(fallback[24],{x:.57,y:.52});Object.assign(fallback[25],{x:.44,y:.73});Object.assign(fallback[26],{x:.56,y:.73});Object.assign(fallback[27],{x:.44,y:.92});Object.assign(fallback[28],{x:.56,y:.92});
+ const lm=puntosFrontales?.length===33?puntosFrontales:fallback,p=i=>({x:ox+lm[i].x*w,y:oy+lm[i].y*h+dy});
+ const ls=p(11),rs=p(12),le=p(13),re=p(14),lw=p(15),rw=p(16),lh=p(23),rh=p(24),lk=p(25),rk=p(26),la=p(27),ra=p(28);
+ const cx=(ls.x+rs.x+lh.x+rh.x)/4,shoulderWidth=Math.abs(rs.x-ls.x)*scale,hipWidth=Math.max(Math.abs(rh.x-lh.x)*scale,shoulderWidth*.66),waistY=(lh.y+rh.y)/2-(Math.abs(lh.y-ls.y)+Math.abs(rh.y-rs.y))*.16,jacketBottom=(lh.y+rh.y)/2+Math.abs((lh.y+rh.y-ls.y-rs.y)/2)*.20;
+ const L={x:cx-shoulderWidth/2,y:(ls.y+rs.y)/2},R={x:cx+shoulderWidth/2,y:(ls.y+rs.y)/2},HL={x:cx-hipWidth*.58,y:jacketBottom},HR={x:cx+hipWidth*.58,y:jacketBottom};
+ x.save();x.globalAlpha=.9;x.fillStyle=color;x.strokeStyle='rgba(245,245,245,.75)';x.lineJoin='round';x.lineCap='round';x.lineWidth=Math.max(2,w*.003);
+ // Las mangas siguen las articulaciones de hombro, codo y muñeca detectadas.
+ x.strokeStyle=color;x.lineWidth=Math.max(shoulderWidth*.19,16);x.beginPath();x.moveTo(L.x,L.y+8);x.lineTo(le.x,le.y);x.lineTo(lw.x,lw.y-5);x.moveTo(R.x,R.y+8);x.lineTo(re.x,re.y);x.lineTo(rw.x,rw.y-5);x.stroke();
+ // Cuerpo del saco, abertura central, solapas, bolsillos y botones.
+ x.strokeStyle='rgba(245,245,245,.75)';x.lineWidth=Math.max(2,w*.003);x.beginPath();x.moveTo(L.x,L.y);x.quadraticCurveTo(cx-shoulderWidth*.55,waistY,HL.x,HL.y);x.lineTo(HR.x,HR.y);x.quadraticCurveTo(cx+shoulderWidth*.55,waistY,R.x,R.y);x.closePath();x.fill();x.stroke();
+ const neckY=L.y+shoulderWidth*.13,lapelY=L.y+Math.abs(jacketBottom-L.y)*.38;x.beginPath();x.moveTo(cx-shoulderWidth*.12,neckY);x.lineTo(cx-shoulderWidth*.28,lapelY);x.lineTo(cx,lapelY+shoulderWidth*.09);x.lineTo(cx+shoulderWidth*.28,lapelY);x.lineTo(cx+shoulderWidth*.12,neckY);x.stroke();x.beginPath();x.moveTo(cx,lapelY+shoulderWidth*.09);x.lineTo(cx,jacketBottom);x.stroke();
+ x.lineWidth=Math.max(2,w*.002);for(let i=0;i<2;i++){x.beginPath();x.arc(cx,lapelY+shoulderWidth*(.22+i*.13),Math.max(3,shoulderWidth*.018),0,Math.PI*2);x.fillStyle='#b9a36a';x.fill()}x.strokeStyle='rgba(245,245,245,.55)';x.beginPath();x.moveTo(cx-hipWidth*.42,jacketBottom-shoulderWidth*.13);x.lineTo(cx-hipWidth*.12,jacketBottom-shoulderWidth*.1);x.moveTo(cx+hipWidth*.12,jacketBottom-shoulderWidth*.1);x.lineTo(cx+hipWidth*.42,jacketBottom-shoulderWidth*.13);x.stroke();
+ x.fillStyle=color;x.strokeStyle='rgba(245,245,245,.55)';
+ if($('#sexo').value==='male'){
+   const crotchY=(lh.y+rh.y)/2+Math.abs(lk.y-lh.y)*.16,legW=Math.max(hipWidth*.42,18);
+   for(const [hip,knee,ankle,side] of [[lh,lk,la,-1],[rh,rk,ra,1]]){x.beginPath();x.moveTo(cx+side*hipWidth*.48,(lh.y+rh.y)/2);x.lineTo(cx+side*hipWidth*.08,crotchY);x.lineTo(knee.x+side*legW*.48,knee.y);x.lineTo(ankle.x+side*legW*.34,ankle.y);x.lineTo(ankle.x-side*legW*.34,ankle.y);x.lineTo(knee.x-side*legW*.48,knee.y);x.lineTo(cx,(lh.y+rh.y)/2);x.closePath();x.fill();x.stroke()}
+ }else{
+   const kneeY=(lk.y+rk.y)/2,skirtBottom=kneeY-Math.abs(kneeY-(lh.y+rh.y)/2)*.05;x.beginPath();x.moveTo(cx-hipWidth*.42,waistY);x.lineTo(cx+hipWidth*.42,waistY);x.lineTo(cx+hipWidth*.62,skirtBottom);x.lineTo(cx-hipWidth*.62,skirtBottom);x.closePath();x.fill();x.stroke();x.beginPath();x.moveTo(cx,waistY);x.lineTo(cx,skirtBottom);x.stroke()
+ }
+ x.restore();
+ // Dibuja las manos sobre las mangas para un compuesto local más creíble.
+ if(puntosFrontales){for(const i of [15,16]){const hand=p(i),r=Math.max(shoulderWidth*.10,12);x.save();x.beginPath();x.ellipse(hand.x,hand.y,r*.75,r*1.15,0,0,Math.PI*2);x.clip();x.drawImage(imagenFrontal,ox,oy,w,h);x.restore()}}
+ x.fillStyle='rgba(0,0,0,.72)';x.fillRect(12,c.height-47,560,34);x.fillStyle='white';x.font='17px system-ui';x.textAlign='left';x.fillText(puntosFrontales?'VISTA 2D · AJUSTADA CON MEDIAPIPE · NO VALIDA AJUSTE':'VISTA 2D MANUAL · PROCESA LAS FOTOS PARA AJUSTARLA',24,c.height-24);$('#descargarVista2D').hidden=false
+}
+for(const id of ['anchoVisual','posicionVerticalVisual','colorTela'])$('#'+id).oninput=dibujarVestidor;
+$('#descargarVista2D').onclick=()=>{const a=document.createElement('a');a.href=$('#lienzoVestidor').toDataURL('image/png');a.download=`vista_2D_${persona().name}.png`;a.click()};
+async function generarVistaCompuesta(){const button=$('#generarDiagnosticoCompuesto'),session=ultimaPrediccion?.local_session?.id;if(!session){$('#estadoCompuesto').textContent='Primero saca las medidas de las fotos en esta sesión.';return}button.disabled=true;$('#estadoCompuesto').textContent='Componiendo localmente: warp, parsing semántico, iluminación, sombras, oclusiones y QA…';try{const r=await fetch('/api/tryon/layered',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:session,sex:$('#sexo').value})}),result=await r.json();if(!r.ok)throw Error(result.error);urlVestidorCompuesto=result.image_data_url;$('#imagenCompuesta').src=urlVestidorCompuesto;const good=result.qa?.status==='tecnicamente_compuesto',values=result.qa?.values||{},poseOk=result.qa?.checks?.sprite_pose_compatible;$('#chipsCalidadCompuesta').innerHTML=[`<span class="chip ${good?'chip-good':'chip-warn'}">QA ${good?'COMPUESTO (no eval\u00faa realismo)':'AJUSTE DUDOSO'}</span>`,`<span class="chip">Pose ${poseOk?'compatible':'requiere '+(values.required_pose_variant||'otra variante')}</span>`,`<span class="chip">Halo ${values.bright_edge_halo_percent??'—'}%</span>`,`<span class="chip">Fragmentación saco ${values.jacket_fragmentation_percent??'—'}%</span>`,`<span class="chip">Extensión ${values.structural_extension_px??'—'}/${values.structural_extension_limit_px??'—'}px</span>`,`<span class="chip">Cuello ${values.collar_visible_edge_gap_px??'—'}px</span>`,`<span class="chip">Puños ${values.cuff_visible_edge_gap_px_mean??'—'}px</span>`].join('');$('#panelVistaCompuesta').hidden=false;$('#estadoCompuesto').textContent=`Vista calculada a ${result.resolution}. Guardada localmente en ${result.stored_at}. Parsing SCHP-ATR local: ${result.semantic_human_parsing?'activo':'falló; se usó fallback Pose'}. ${result.notice}`;document.querySelector('.technical-details').open=false}catch(e){$('#estadoCompuesto').textContent=e.message}finally{button.disabled=!ultimaPrediccion?.local_session?.id}}
+$('#generarDiagnosticoCompuesto').onclick=generarVistaCompuesta;
+$('#descargarCompuesto').onclick=()=>{if(!urlVestidorCompuesto)return;const a=document.createElement('a');a.href=urlVestidorCompuesto;a.download=`vista_2D_calculada_${persona().name}.png`;a.click()};
+$('#generarVestidorReal').onclick=async()=>{const button=$('#generarVestidorReal'),session=ultimaPrediccion?.local_session?.id;if(!session){$('#estadoVestidorReal').textContent='Primero procesa las fotografías.';return}button.disabled=true;$('#estadoVestidorReal').textContent='Generando el vestidor con la GPU local. Este proceso puede tardar unos minutos…';try{const r=await fetch('/api/tryon',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:session,sex:$('#sexo').value})}),result=await r.json();if(!r.ok)throw Error(result.error);urlVestidorReal=result.image_data_url;$('#imagenVestidorExperimental').src=urlVestidorReal;$('#tituloVestidorExperimental').textContent=$('#sexo').value==='female'?'Saco y falda':'Saco y pantalón';$('#avisoVestidorExperimental').innerHTML='<p class="result-caption">Visualización generada localmente para esta persona.</p>';$('#panelVestidorExperimental').hidden=false;$('#estadoVestidorReal').textContent='Vestidor generado correctamente.';$('#panelVestidorExperimental').scrollIntoView({behavior:'smooth',block:'start'})}catch(e){$('#estadoVestidorReal').textContent=e.message}finally{button.disabled=!(motorVestidorListo&&ultimaPrediccion?.local_session?.id)}};
+$('#descargarVestidorReal').onclick=()=>{if(!urlVestidorReal)return;const a=document.createElement('a');a.href=urlVestidorReal;a.download=`prueba_virtual_${persona().name}.png`;a.click()};
+actualizarPerfiles();dibujarPestanas();dibujarCampos();dibujarVestidor();actualizarEjemploReferencia();cargarEstadoVestidor();
+</script></html>

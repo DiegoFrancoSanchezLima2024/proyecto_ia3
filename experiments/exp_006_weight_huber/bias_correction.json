@@ -1,0 +1,92 @@
+{
+  "bias_cm": {
+    "waist": 1.008,
+    "hip": 0.336,
+    "calf": -0.29,
+    "arm-length": 0.295,
+    "leg-length": 0.524
+  },
+  "detail": {
+    "chest": {
+      "mean_signed_error_cm": 0.321,
+      "standard_error_cm": 0.187,
+      "n_subjects": 303,
+      "applied": false
+    },
+    "waist": {
+      "mean_signed_error_cm": 1.008,
+      "standard_error_cm": 0.188,
+      "n_subjects": 303,
+      "applied": true
+    },
+    "hip": {
+      "mean_signed_error_cm": 0.336,
+      "standard_error_cm": 0.13,
+      "n_subjects": 303,
+      "applied": true
+    },
+    "thigh": {
+      "mean_signed_error_cm": -0.185,
+      "standard_error_cm": 0.101,
+      "n_subjects": 303,
+      "applied": false
+    },
+    "calf": {
+      "mean_signed_error_cm": -0.29,
+      "standard_error_cm": 0.081,
+      "n_subjects": 303,
+      "applied": true
+    },
+    "ankle": {
+      "mean_signed_error_cm": -0.076,
+      "standard_error_cm": 0.05,
+      "n_subjects": 303,
+      "applied": false
+    },
+    "arm-length": {
+      "mean_signed_error_cm": 0.295,
+      "standard_error_cm": 0.065,
+      "n_subjects": 303,
+      "applied": true
+    },
+    "forearm": {
+      "mean_signed_error_cm": -0.019,
+      "standard_error_cm": 0.058,
+      "n_subjects": 303,
+      "applied": false
+    },
+    "wrist": {
+      "mean_signed_error_cm": -0.015,
+      "standard_error_cm": 0.038,
+      "n_subjects": 303,
+      "applied": false
+    },
+    "bicep": {
+      "mean_signed_error_cm": -0.062,
+      "standard_error_cm": 0.09,
+      "n_subjects": 303,
+      "applied": false
+    },
+    "shoulder-breadth": {
+      "mean_signed_error_cm": -0.011,
+      "standard_error_cm": 0.049,
+      "n_subjects": 303,
+      "applied": false
+    },
+    "leg-length": {
+      "mean_signed_error_cm": 0.524,
+      "standard_error_cm": 0.089,
+      "n_subjects": 303,
+      "applied": true
+    },
+    "shoulder-to-crotch": {
+      "mean_signed_error_cm": -0.165,
+      "standard_error_cm": 0.072,
+      "n_subjects": 303,
+      "applied": false
+    }
+  },
+  "source": "experiments\\exp_006_weight_huber\\predictions_calibration.csv",
+  "min_cm": 0.2,
+  "z": 2.0
+}

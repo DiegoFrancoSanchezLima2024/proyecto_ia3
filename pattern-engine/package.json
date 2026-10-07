@@ -1,0 +1,22 @@
+{
+  "name": "sastre-ia-pattern-engine",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "node generate.mjs",
+    "start": "node server.mjs",
+    "test": "node smoke-test.mjs && node pruebas-contratos.mjs && node pruebas-http.mjs"
+  },
+  "dependencies": {
+    "@freesewing/charlie": "4.10.1",
+    "@freesewing/config": "4.10.1",
+    "@freesewing/jaeger": "4.10.1",
+    "@freesewing/penelope": "4.10.1",
+    "@freesewing/plugin-transform": "4.10.1",
+    "pdfkit": "^0.20.2",
+    "svg-to-pdfkit": "^0.1.8"
+  },
+  "devDependencies": {
+    "@freesewing/models": "4.10.1"
+  }
+}

@@ -1,0 +1,11 @@
+# Ablacion enfocada en las medidas que gobiernan saco, pantalon y falda.
+# Hereda todo el perfil validado para RTX 3050; solo cambia la funcion objetivo.
+extends: default.yaml
+
+training:
+  loss: huber
+  measurement_weights:
+    chest: 1.75
+    waist: 2.00
+    hip: 1.75
+    shoulder-to-crotch: 1.25

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "dictionary": "DICT_4X4_50",
+  "charuco": {"squares_x": 5, "squares_y": 7, "square_m": 0.03, "marker_m": 0.022},
+  "floor": {
+    "marker_m": 0.16,
+    "width_m": 1.0,
+    "depth_m": 0.8,
+    "coordinate_system": "X derecha, Y alejado de la camara, Z arriba; origen centro del suelo",
+    "markers": [
+      {"id": 30, "center_m": [-0.42, 0.32], "label": "FONDO IZQUIERDA"},
+      {"id": 31, "center_m": [0.42, 0.32], "label": "FONDO DERECHA"},
+      {"id": 32, "center_m": [-0.42, -0.32], "label": "FRENTE IZQUIERDA"},
+      {"id": 33, "center_m": [0.42, -0.32], "label": "FRENTE DERECHA"}
+    ]
+  },
+  "quality": {
+    "min_train_views": 12,
+    "min_validation_views": 4,
+    "min_charuco_corners": 10,
+    "max_train_rms_px": 1.0,
+    "max_validation_view_rms_px": 1.5,
+    "min_floor_markers": 3,
+    "min_marker_edge_px": 20.0,
+    "max_floor_rms_px": 1.5,
+    "max_floor_corner_error_px": 3.0
+  }
+}

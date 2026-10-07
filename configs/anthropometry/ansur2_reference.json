@@ -1,0 +1,384 @@
+{
+  "schema_version": "1.0",
+  "reference_id": "ansur2_public_height_weight_ols_v1",
+  "purpose": "external_plausibility_filter_not_training_ground_truth",
+  "units": {
+    "measurements": "cm",
+    "weight": "kg"
+  },
+  "source": {
+    "official_page": "https://ph.health.mil/topics/workplacehealth/ergo/Pages/Anthropometric-Database.aspx",
+    "public_release": "ANSUR II 2012 public CSV files",
+    "acquisition_mirror": "https://github.com/senihberkay/US-Army-ANSUR-II",
+    "local_files": {
+      "male": {
+        "path": "dataset\\ansur2\\raw\\ANSUR_II_MALE_Public.csv",
+        "sha256": "0547aea0170e5293de519389981135e75803f02e6d40c77ace740decc0caac64"
+      },
+      "female": {
+        "path": "dataset\\ansur2\\raw\\ANSUR_II_FEMALE_Public.csv",
+        "sha256": "ed7e800aa97a4d42f8286b988be2fe1883a2e789588169db959864b707d1757a"
+      }
+    }
+  },
+  "fit": {
+    "predictors": [
+      "height_cm",
+      "weight_kg"
+    ],
+    "method": "ordinary_least_squares",
+    "residual_interval": "empirical_95_percent"
+  },
+  "sex_models": {
+    "male": {
+      "rows": 4082,
+      "input_domain_p01_p99": {
+        "height_cm": [
+          160.16,
+          192.7
+        ],
+        "weight_kg": [
+          57.8,
+          124.21
+        ]
+      },
+      "measurements": {
+        "chest": {
+          "ansur_column": "chestcircumference",
+          "n": 4082,
+          "coefficients": {
+            "intercept": 103.64341981,
+            "height_cm": -0.29094387,
+            "weight_kg": 0.62348753
+          },
+          "residual_interval_cm": [
+            -6.082,
+            6.4148
+          ],
+          "population_quantiles_cm": {
+            "p05": 92.2,
+            "p25": 99.6,
+            "p50": 105.6,
+            "p75": 111.7,
+            "p95": 120.7
+          }
+        },
+        "waist": {
+          "ansur_column": "waistcircumference",
+          "n": 4082,
+          "coefficients": {
+            "intercept": 102.49061295,
+            "height_cm": -0.43576782,
+            "weight_kg": 0.79623664
+          },
+          "residual_interval_cm": [
+            -8.7678,
+            8.5772
+          ],
+          "population_quantiles_cm": {
+            "p05": 76.8,
+            "p25": 85.7,
+            "p50": 93.7,
+            "p75": 101.6,
+            "p95": 113.09
+          }
+        },
+        "hip": {
+          "ansur_column": "buttockcircumference",
+          "n": 4082,
+          "coefficients": {
+            "intercept": 80.84110807,
+            "height_cm": -0.14014267,
+            "weight_kg": 0.53462023
+          },
+          "residual_interval_cm": [
+            -5.0669,
+            5.2888
+          ],
+          "population_quantiles_cm": {
+            "p05": 89.9,
+            "p25": 96.7,
+            "p50": 101.7,
+            "p75": 106.8,
+            "p95": 114.9
+          }
+        },
+        "thigh": {
+          "ansur_column": "thighcircumference",
+          "n": 4082,
+          "coefficients": {
+            "intercept": 59.47446041,
+            "height_cm": -0.18358879,
+            "weight_kg": 0.41253826
+          },
+          "residual_interval_cm": [
+            -4.512,
+            4.4181
+          ],
+          "population_quantiles_cm": {
+            "p05": 53.2,
+            "p25": 58.6,
+            "p50": 62.4,
+            "p75": 66.2,
+            "p95": 72.3
+          }
+        },
+        "calf": {
+          "ansur_column": "calfcircumference",
+          "n": 4082,
+          "coefficients": {
+            "intercept": 35.09622619,
+            "height_cm": -0.06844723,
+            "weight_kg": 0.18884347
+          },
+          "residual_interval_cm": [
+            -3.0339,
+            3.2675
+          ],
+          "population_quantiles_cm": {
+            "p05": 34.6,
+            "p25": 37.2,
+            "p50": 39.2,
+            "p75": 41.2,
+            "p95": 44.3
+          }
+        },
+        "ankle": {
+          "ansur_column": "anklecircumference",
+          "n": 4082,
+          "coefficients": {
+            "intercept": 15.30912845,
+            "height_cm": 0.00791107,
+            "weight_kg": 0.07291423
+          },
+          "residual_interval_cm": [
+            -1.9037,
+            2.06
+          ],
+          "population_quantiles_cm": {
+            "p05": 20.6,
+            "p25": 21.92,
+            "p50": 22.8,
+            "p75": 23.9,
+            "p95": 25.4
+          }
+        },
+        "wrist": {
+          "ansur_column": "wristcircumference",
+          "n": 4082,
+          "coefficients": {
+            "intercept": 9.75001241,
+            "height_cm": 0.02524959,
+            "weight_kg": 0.03984016
+          },
+          "residual_interval_cm": [
+            -1.1476,
+            1.1995
+          ],
+          "population_quantiles_cm": {
+            "p05": 16.2,
+            "p25": 17.0,
+            "p50": 17.6,
+            "p75": 18.2,
+            "p95": 19.1
+          }
+        },
+        "shoulder-breadth": {
+          "ansur_column": "biacromialbreadth",
+          "n": 4082,
+          "coefficients": {
+            "intercept": 20.45890694,
+            "height_cm": 0.0916795,
+            "weight_kg": 0.05855402
+          },
+          "residual_interval_cm": [
+            -2.9306,
+            2.8695
+          ],
+          "population_quantiles_cm": {
+            "p05": 38.4,
+            "p25": 40.3,
+            "p50": 41.5,
+            "p75": 42.8,
+            "p95": 44.7
+          }
+        }
+      }
+    },
+    "female": {
+      "rows": 1986,
+      "input_domain_p01_p99": {
+        "height_cm": [
+          148.26,
+          177.76
+        ],
+        "weight_kg": [
+          46.66,
+          97.45
+        ]
+      },
+      "measurements": {
+        "chest": {
+          "ansur_column": "chestcircumference",
+          "n": 1986,
+          "coefficients": {
+            "intercept": 99.03412155,
+            "height_cm": -0.329162,
+            "weight_kg": 0.72692053
+          },
+          "residual_interval_cm": [
+            -7.9984,
+            8.9925
+          ],
+          "population_quantiles_cm": {
+            "p05": 82.43,
+            "p25": 88.9,
+            "p50": 94.0,
+            "p75": 99.9,
+            "p95": 109.4
+          }
+        },
+        "waist": {
+          "ansur_column": "waistcircumference",
+          "n": 1986,
+          "coefficients": {
+            "intercept": 101.41237119,
+            "height_cm": -0.4717187,
+            "weight_kg": 0.90758444
+          },
+          "residual_interval_cm": [
+            -9.2774,
+            9.658
+          ],
+          "population_quantiles_cm": {
+            "p05": 71.0,
+            "p25": 79.0,
+            "p50": 85.2,
+            "p75": 92.5,
+            "p95": 104.0
+          }
+        },
+        "hip": {
+          "ansur_column": "buttockcircumference",
+          "n": 1986,
+          "coefficients": {
+            "intercept": 84.68919559,
+            "height_cm": -0.17840527,
+            "weight_kg": 0.68609252
+          },
+          "residual_interval_cm": [
+            -5.4724,
+            5.8609
+          ],
+          "population_quantiles_cm": {
+            "p05": 90.12,
+            "p25": 96.9,
+            "p50": 101.85,
+            "p75": 106.9,
+            "p95": 115.57
+          }
+        },
+        "thigh": {
+          "ansur_column": "thighcircumference",
+          "n": 1986,
+          "coefficients": {
+            "intercept": 58.40135673,
+            "height_cm": -0.19423037,
+            "weight_kg": 0.51423135
+          },
+          "residual_interval_cm": [
+            -4.4877,
+            4.3094
+          ],
+          "population_quantiles_cm": {
+            "p05": 52.7,
+            "p25": 57.9,
+            "p50": 61.3,
+            "p75": 65.1,
+            "p95": 71.1
+          }
+        },
+        "calf": {
+          "ansur_column": "calfcircumference",
+          "n": 1986,
+          "coefficients": {
+            "intercept": 30.58543721,
+            "height_cm": -0.05141444,
+            "weight_kg": 0.22304378
+          },
+          "residual_interval_cm": [
+            -3.3391,
+            3.519
+          ],
+          "population_quantiles_cm": {
+            "p05": 32.8,
+            "p25": 35.4,
+            "p50": 37.2,
+            "p75": 39.18,
+            "p95": 42.3
+          }
+        },
+        "ankle": {
+          "ansur_column": "anklecircumference",
+          "n": 1986,
+          "coefficients": {
+            "intercept": 13.98666689,
+            "height_cm": 0.01407417,
+            "weight_kg": 0.07815083
+          },
+          "residual_interval_cm": [
+            -2.1209,
+            2.6073
+          ],
+          "population_quantiles_cm": {
+            "p05": 19.3,
+            "p25": 20.5,
+            "p50": 21.5,
+            "p75": 22.5,
+            "p95": 24.2
+          }
+        },
+        "wrist": {
+          "ansur_column": "wristcircumference",
+          "n": 1986,
+          "coefficients": {
+            "intercept": 8.08619685,
+            "height_cm": 0.0279462,
+            "weight_kg": 0.04194465
+          },
+          "residual_interval_cm": [
+            -1.0304,
+            1.0765
+          ],
+          "population_quantiles_cm": {
+            "p05": 14.22,
+            "p25": 15.0,
+            "p50": 15.4,
+            "p75": 16.0,
+            "p95": 16.8
+          }
+        },
+        "shoulder-breadth": {
+          "ansur_column": "biacromialbreadth",
+          "n": 1986,
+          "coefficients": {
+            "intercept": 13.19890704,
+            "height_cm": 0.12829292,
+            "weight_kg": 0.03606689
+          },
+          "residual_interval_cm": [
+            -3.0368,
+            2.7729
+          ],
+          "population_quantiles_cm": {
+            "p05": 33.5,
+            "p25": 35.3,
+            "p50": 36.5,
+            "p75": 37.8,
+            "p95": 39.6
+          }
+        }
+      }
+    }
+  }
+}

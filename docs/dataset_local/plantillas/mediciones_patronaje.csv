@@ -1,0 +1,2 @@
+sujeto_id,clave_medida,nombre_es,version_protocolo,medidor_id,repeticion,valor_cm,valida,observaciones
+SATRE_0001,neck,cuello,SATRE-LOCAL-1.0,M01,1,,true,

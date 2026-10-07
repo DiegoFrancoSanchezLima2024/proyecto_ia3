@@ -1,0 +1,202 @@
+{
+  "schema_version": "1.0",
+  "coordinate_system": "normalized_xy_top_left",
+  "canvas_px": [
+    1024,
+    2048
+  ],
+  "items": [
+    {
+      "id": "male-jacket-classic-navy-front-neutral",
+      "category": "jacket",
+      "sex": "male",
+      "pose": "front-neutral",
+      "file": "jacket/classic-navy/front-neutral.png",
+      "width_px": 1024,
+      "height_px": 2048,
+      "background": "transparent",
+      "anchors_normalized": {
+        "left_shoulder": [
+          0.27,
+          0.18
+        ],
+        "right_shoulder": [
+          0.73,
+          0.18
+        ],
+        "left_elbow": [
+          0.18,
+          0.42
+        ],
+        "right_elbow": [
+          0.82,
+          0.42
+        ],
+        "left_wrist": [
+          0.12,
+          0.69
+        ],
+        "right_wrist": [
+          0.88,
+          0.69
+        ],
+        "left_waist": [
+          0.34,
+          0.55
+        ],
+        "right_waist": [
+          0.66,
+          0.55
+        ],
+        "left_hip": [
+          0.31,
+          0.78
+        ],
+        "right_hip": [
+          0.69,
+          0.78
+        ]
+      },
+      "source_provenance": "SATRE-IA local catalog asset"
+    },
+    {
+      "id": "female-jacket-classic-navy-front-neutral",
+      "category": "jacket",
+      "sex": "female",
+      "pose": "front-neutral",
+      "file": "jacket/classic-navy/front-neutral-female.png",
+      "width_px": 1024,
+      "height_px": 2048,
+      "background": "transparent",
+      "anchors_normalized": {
+        "left_shoulder": [
+          0.28,
+          0.18
+        ],
+        "right_shoulder": [
+          0.72,
+          0.18
+        ],
+        "left_elbow": [
+          0.18,
+          0.42
+        ],
+        "right_elbow": [
+          0.82,
+          0.42
+        ],
+        "left_wrist": [
+          0.12,
+          0.69
+        ],
+        "right_wrist": [
+          0.88,
+          0.69
+        ],
+        "left_waist": [
+          0.36,
+          0.55
+        ],
+        "right_waist": [
+          0.64,
+          0.55
+        ],
+        "left_hip": [
+          0.32,
+          0.78
+        ],
+        "right_hip": [
+          0.68,
+          0.78
+        ]
+      },
+      "source_provenance": "SATRE-IA local catalog asset"
+    },
+    {
+      "id": "male-trousers-straight-navy-front-neutral",
+      "category": "trousers",
+      "sex": "male",
+      "pose": "front-neutral",
+      "file": "trousers/straight-navy/front-neutral.png",
+      "width_px": 1024,
+      "height_px": 2048,
+      "background": "transparent",
+      "anchors_normalized": {
+        "left_waist": [
+          0.25,
+          0.08
+        ],
+        "right_waist": [
+          0.75,
+          0.08
+        ],
+        "left_hip": [
+          0.28,
+          0.18
+        ],
+        "right_hip": [
+          0.72,
+          0.18
+        ],
+        "left_knee": [
+          0.31,
+          0.57
+        ],
+        "right_knee": [
+          0.69,
+          0.57
+        ],
+        "left_ankle": [
+          0.34,
+          0.94
+        ],
+        "right_ankle": [
+          0.66,
+          0.94
+        ]
+      },
+      "source_provenance": "SATRE-IA local catalog asset"
+    },
+    {
+      "id": "female-skirt-pencil-navy-midi-front",
+      "category": "skirt",
+      "sex": "female",
+      "pose": "midi-front",
+      "file": "skirt/pencil-navy/midi-front.png",
+      "width_px": 1024,
+      "height_px": 2048,
+      "background": "transparent",
+      "anchors_normalized": {
+        "left_waist": [
+          0.3,
+          0.08
+        ],
+        "right_waist": [
+          0.7,
+          0.08
+        ],
+        "left_hip": [
+          0.24,
+          0.3
+        ],
+        "right_hip": [
+          0.76,
+          0.3
+        ],
+        "left_knee": [
+          0.28,
+          0.91
+        ],
+        "right_knee": [
+          0.72,
+          0.91
+        ]
+      },
+      "source_provenance": "SATRE-IA local catalog asset"
+    }
+  ],
+  "limitations": [
+    "Solo pose frontal neutra",
+    "No valida caida ni holgura de confeccion"
+  ]
+}

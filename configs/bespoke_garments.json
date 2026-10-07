@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "config_id": "satre_bespoke_classic_v1",
+  "sex_profiles": {
+    "male": {
+      "garments": {
+        "jacket": {
+          "style_profile": "classic_single_breasted_prototype",
+          "required_measurements": ["chest", "waist", "hip", "shoulder-breadth", "shoulder-to-crotch", "arm-length", "bicep", "wrist"],
+          "ease_cm": {"chest": 10.0, "waist": 8.0, "hip": 8.0, "bicep": 6.0, "wrist": 5.0},
+          "seam_allowance_cm": 1.5,
+          "hem_allowance_cm": 4.0,
+          "pattern_pieces": ["front", "side_front", "back", "side_back", "upper_sleeve", "under_sleeve", "collar", "front_facing", "pocket_welt"]
+        },
+        "trousers": {
+          "style_profile": "classic_straight_prototype",
+          "required_measurements": ["waist", "hip", "thigh", "calf", "ankle", "leg-length"],
+          "ease_cm": {"waist": 2.0, "hip": 4.0, "thigh": 4.0, "calf": 4.0, "ankle": 4.0},
+          "seam_allowance_cm": 1.5,
+          "hem_allowance_cm": 4.0,
+          "pattern_pieces": ["front_leg", "back_leg", "waistband", "fly_facing", "pocket_bag"]
+        }
+      }
+    },
+    "female": {
+      "garments": {
+        "jacket": {
+          "style_profile": "classic_single_breasted_prototype",
+          "required_measurements": ["chest", "waist", "hip", "shoulder-breadth", "shoulder-to-crotch", "arm-length", "bicep", "wrist"],
+          "ease_cm": {"chest": 9.0, "waist": 7.0, "hip": 8.0, "bicep": 6.0, "wrist": 5.0},
+          "seam_allowance_cm": 1.5,
+          "hem_allowance_cm": 4.0,
+          "pattern_pieces": ["front", "side_front", "back", "side_back", "upper_sleeve", "under_sleeve", "collar", "front_facing", "pocket_welt"]
+        },
+        "skirt": {
+          "style_profile": "classic_straight_prototype",
+          "required_measurements": ["waist", "hip"],
+          "ease_cm": {"waist": 2.0, "hip": 4.0},
+          "seam_allowance_cm": 1.5,
+          "hem_allowance_cm": 4.0,
+          "pattern_pieces": ["front_skirt", "back_skirt", "waistband", "vent_facing"]
+        }
+      }
+    }
+  }
+}

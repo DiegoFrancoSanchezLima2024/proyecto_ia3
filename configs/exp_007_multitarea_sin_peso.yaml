@@ -1,0 +1,60 @@
+# Dos siluetas BodyM + estatura como unicas entradas antropometricas.
+# El peso es un objetivo auxiliar: nunca se entrega al modelo durante inferencia.
+extends: default.yaml
+
+project:
+  version: "0.3.0"
+
+dataset:
+  # Alto x ancho. BodyM y las fotos verticales usan relacion 4:3; no deformar
+  # cada silueta a un cuadrado como en los experimentos historicos.
+  img_size: [320, 240]
+  views: ["front", "left"]
+  use_gender_meta: false
+  use_weight_meta: false
+  measurements:
+    - chest
+    - waist
+    - hip
+    - thigh
+    - calf
+    - ankle
+    - arm-length
+    - forearm
+    - wrist
+    - bicep
+    - shoulder-breadth
+    - leg-length
+    - shoulder-to-crotch
+    - weight_kg
+
+model:
+  use_geometry: false
+  # Fuerza al modelo a conservar el perfil de ancho a distintas alturas, una
+  # señal útil para peso/volumen que el pooling global puede diluir.
+  use_profile_features: true
+  profile_bins: 32
+
+training:
+  loss: huber
+  subject_balanced_sampling: true
+  # Solo las 13 medidas deciden el mejor checkpoint. weight_kg es auxiliar.
+  selection_measurements:
+    - chest
+    - waist
+    - hip
+    - thigh
+    - calf
+    - ankle
+    - arm-length
+    - forearm
+    - wrist
+    - bicep
+    - shoulder-breadth
+    - leg-length
+    - shoulder-to-crotch
+  measurement_weights:
+    chest: 1.5
+    waist: 1.5
+    hip: 1.5
+    weight_kg: 0.75

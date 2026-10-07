@@ -1,0 +1,77 @@
+{
+  "seed": 42,
+  "val_ratio": 0.15,
+  "calibration_ratio": 0.15,
+  "measurements": [
+    "chest",
+    "waist",
+    "hip",
+    "thigh",
+    "calf",
+    "ankle",
+    "arm-length",
+    "forearm",
+    "wrist",
+    "bicep",
+    "shoulder-breadth",
+    "leg-length",
+    "shoulder-to-crotch"
+  ],
+  "splits": {
+    "val": {
+      "n_samples": 892,
+      "n_subjects": 303
+    },
+    "calibration": {
+      "n_samples": 904,
+      "n_subjects": 303
+    },
+    "train": {
+      "n_samples": 4337,
+      "n_subjects": 1411
+    },
+    "test": {
+      "n_samples": 1684,
+      "n_subjects": 87
+    },
+    "test_wild": {
+      "n_samples": 1160,
+      "n_subjects": 400
+    }
+  },
+  "integrity": {
+    "train": {
+      "source": "C:\\Users\\diego\\Desktop\\proyecto de ia3\\proyecto-sastre-ia\\dataset\\bodym\\train",
+      "rows_merged": 6134,
+      "rows_valid": 6133,
+      "invalid_numeric": 0,
+      "non_positive_numeric": 0,
+      "invalid_images": 1,
+      "image_failures": [
+        {
+          "photo_id": "8b12034fd725eaff3555deb587ec5084",
+          "front": "ok",
+          "left": "too_dark(0.0251)"
+        }
+      ]
+    },
+    "test": {
+      "source": "C:\\Users\\diego\\Desktop\\proyecto de ia3\\proyecto-sastre-ia\\dataset\\bodym\\testA",
+      "rows_merged": 1684,
+      "rows_valid": 1684,
+      "invalid_numeric": 0,
+      "non_positive_numeric": 0,
+      "invalid_images": 0,
+      "image_failures": []
+    },
+    "test_wild": {
+      "source": "C:\\Users\\diego\\Desktop\\proyecto de ia3\\proyecto-sastre-ia\\dataset\\bodym\\testB",
+      "rows_merged": 1160,
+      "rows_valid": 1160,
+      "invalid_numeric": 0,
+      "non_positive_numeric": 0,
+      "invalid_images": 0,
+      "image_failures": []
+    }
+  }
+}

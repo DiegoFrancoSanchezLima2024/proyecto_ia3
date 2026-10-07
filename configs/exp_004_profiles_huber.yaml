@@ -1,0 +1,9 @@
+# Añade perfiles espaciales frontal/lateral al mejor baseline Huber.
+extends: default.yaml
+
+model:
+  use_profile_features: true
+  profile_bins: 32
+
+training:
+  loss: huber
